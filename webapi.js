@@ -1,16 +1,16 @@
 //接口鉴权chenjl111
 var APIKey = "1111"
 var apiSecret ="1111111"
-var host="host: ws-api.xfyun.cn"
-var date=new Date().toGMTString()//日期必须是这个格式
-var request_line="GET /v2/iat HTTP/1.1"
-var signature_origin = host+"\n"+"date: "+date+"\n"+request_line
-signature_sha=CryptoJS_xm.HmacSHA256(signature_origin,apiSecret)//CryptoJS来自CryptoJS v3.1的hmac-sha256.js，去百度上下吧
-signature=CryptoJS.enc.Base64.stringify(signature_sha)
-authorization_origin ='api_key="'+APIKey+'", algorithm="hmac-sha256", headers="host date request-line", signature="'+signature+'"'
-authorization = window.btoa(authorization_origin)
-ws="wss://ws-api.xfyun.cn/v2/iat?authorization="+authorization+"&date="+date+"&host=ws-api.xfyun.cn"
-var ws = new WebSocket(ws);
+var host = "host: tts-api.xfyun.cn";
+var date = new Date().toGMTString(); //日期必须是这个格式
+var request_line = "GET /v2/tts HTTP/1.1";
+var signature_origin = host+"\n"+"date: "+date+"\n"+request_line,
+    signature_sha=CryptoJS.HmacSHA256(signature_origin,apiSecret),//CryptoJS来自CryptoJS v3.1的hmac-sha256.js，去百度上下吧
+    signature=CryptoJS.enc.Base64.stringify(signature_sha),
+    authorization_origin ='api_key="'+APIKey+'", algorithm="hmac-sha256", headers="host date request-line", signature="'+signature+'"',
+    authorization = window.btoa(authorization_origin),
+    ws="ws://tts-api.xfyun.cn/v2/tts?authorization="+authorization+"&date="+date+"&host=tts-api.xfyun.cn",
+    ws = new WebSocket(ws);
 ws.onerror=function(data){
   console.log("失败")
 }
